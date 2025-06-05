@@ -117,7 +117,7 @@ const selectedMutations = mutations
 .map(m => m.trim())
 .filter(m => mutationMultipliers[m]);
 
-const mutationMult = 1 + selectedMutations.reduce((acc, m) => acc + (mutationMultipliers[m] - 1), 0);
+const mutationMult = selectedMutations.reduce((acc, m) => acc * mutationMultipliers[m], 1);
 
 const clamped = Math.max(0.95, weight / weightDivisor);
 const value = Math.round(baseValue * mutationMult * variantMult * (clamped ** 2));
