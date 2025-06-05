@@ -78,16 +78,28 @@ const variantMultipliers = {
 };
 
 const mutationList = [
-  "Wet", "Chilled", "Choc", "Frozen", "Shocked",
-  "Pollinated", "HoneyGlazed", "Moonlit",
-  "Bloodlit", "Plasma", "Zombified"
+  "Zombified", "Wet", "Voidtouched", "Twisted", "Shocked",
+  "Celestial", "Disco", "Frozen", "Burnt", "HoneyGlazed",
+  "Plasma", "Bloodlit", "Pollinated", "Moonlit", "Choc", "Chilled"
 ];
 
-// TEMP VALUES: Replace with your real mutation multipliers when ready
 const mutationMultipliers = {
-  "Wet": 1.1, "Chilled": 1.2, "Choc": 1.3, "Frozen": 1.4,
-  "Shocked": 1.1, "Pollinated": 1.25, "HoneyGlazed": 1.15,
-  "Moonlit": 1.5, "Bloodlit": 1.5, "Plasma": 1.6, "Zombified": 1.7
+  "Zombified": 25,
+  "Wet": 2,
+  "Voidtouched": 135,
+  "Twisted": 5,
+  "Shocked": 100,
+  "Celestial": 120,
+  "Disco": 125,
+  "Frozen": 10,
+  "Burnt": 5,
+  "HoneyGlazed": 5,
+  "Plasma": 5,
+  "Bloodlit": 4,
+  "Pollinated": 3,
+  "Moonlit": 2,
+  "Choc": 2,
+  "Chilled": 2
 };
 
 function populateDropdowns() {
