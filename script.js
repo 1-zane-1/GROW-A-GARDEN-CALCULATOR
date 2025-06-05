@@ -1,75 +1,76 @@
-const items = [
-  { name: "Carrot", weightDivisor: 0.275, baseValue: 20, unknown: 100 },
-  { name: "Strawberry", weightDivisor: 0.3, baseValue: 15, unknown: 100 },
-  { name: "Blueberry", weightDivisor: 0.2, baseValue: 20, unknown: 100 },
-  { name: "Orange Tulip", weightDivisor: 0.05, baseValue: 850, unknown: 55 },
-  { name: "Tomato", weightDivisor: 0.5, baseValue: 30, unknown: 100 },
-  { name: "Corn", weightDivisor: 2, baseValue: 40, unknown: 100 },
-  { name: "Daffodil", weightDivisor: 0.2, baseValue: 1000, unknown: 45 },
-  { name: "Watermelon", weightDivisor: 7, baseValue: 3000, unknown: 70 },
-  { name: "Pumpkin", weightDivisor: 8, baseValue: 3400, unknown: 80 },
-  { name: "Apple", weightDivisor: 3, baseValue: 275, unknown: 50 },
-  { name: "Bamboo", weightDivisor: 4, baseValue: 4000, unknown: 35 },
-  { name: "Coconut", weightDivisor: 14, baseValue: 400, unknown: 70 },
-  { name: "Cactus", weightDivisor: 7, baseValue: 3400, unknown: 100 },
-  { name: "Dragon Fruit", weightDivisor: 12, baseValue: 4750, unknown: 100 },
-  { name: "Mango", weightDivisor: 15, baseValue: 6500, unknown: 200 },
-  { name: "Grape", weightDivisor: 3, baseValue: 7850, unknown: 200 },
-  { name: "Mushroom", weightDivisor: 25, baseValue: 151000, unknown: 220 },
-  { name: "Pepper", weightDivisor: 5, baseValue: 8000, unknown: 200 },
-  { name: "Cacao", weightDivisor: 8, baseValue: 12000, unknown: 250 },
-  { name: "Beanstalk", weightDivisor: 10, baseValue: 28000, unknown: 300 },
-  { name: "Chocolate Carrot", weightDivisor: 0.275, baseValue: 11000, unknown: 100 },
-  { name: "Red Lollipop", weightDivisor: 4, baseValue: 50000, unknown: 65 },
-  { name: "Blue Lollipop", weightDivisor: 1, baseValue: 50000, unknown: 65 },
-  { name: "Candy Sunflower", weightDivisor: 1.5, baseValue: 80000, unknown: 85 },
-  { name: "Easter Egg", weightDivisor: 3, baseValue: 2500, unknown: 20 },
-  { name: "Candy Blossom", weightDivisor: 3, baseValue: 100000, unknown: 40 },
-  { name: "Peach", weightDivisor: 2, baseValue: 300, unknown: 70 },
-  { name: "Raspberry", weightDivisor: 0.75, baseValue: 100, unknown: 70 },
-  { name: "Pineapple", weightDivisor: 3, baseValue: 2000, unknown: 70 },
-  { name: "Papaya", weightDivisor: 3, baseValue: 1000, unknown: 60 },
-  { name: "Banana", weightDivisor: 1.5, baseValue: 1750, unknown: 100 },
-  { name: "Passionfruit", weightDivisor: 3, baseValue: 3550, unknown: 40 },
-  { name: "Soul Fruit", weightDivisor: 25, baseValue: 7750, unknown: 200 },
-  { name: "Cursed Fruit", weightDivisor: 30, baseValue: 25750, unknown: 200 },
-  { name: "Mega Mushroom", weightDivisor: 70, baseValue: 500, unknown: 2000000 },
-  { name: "Cherry Blossom", weightDivisor: 3, baseValue: 500, unknown: 400 },
-  { name: "Purple Cabbage", weightDivisor: 5, baseValue: 500, unknown: 70 },
-  { name: "Lemon", weightDivisor: 1, baseValue: 350, unknown: 50 },
-  { name: "Pear", weightDivisor: 3, baseValue: 500, unknown: 20 },
-  { name: "Crocus", weightDivisor: 0.05, baseValue: 850, unknown: 55 },
-  { name: "Pink Tulip", weightDivisor: 0.05, baseValue: 850, unknown: 55 },
-  { name: "Succulent", weightDivisor: 3, baseValue: 500, unknown: 150 },
-  { name: "Avocado", weightDivisor: 2, baseValue: 500, unknown: 150 },
-  { name: "Cranberry", weightDivisor: 1, baseValue: 3000, unknown: 50 },
-  { name: "Durian", weightDivisor: 8, baseValue: 7000, unknown: 200 },
-  { name: "Eggplant", weightDivisor: 5, baseValue: 9500, unknown: 220 },
-  { name: "Lotus", weightDivisor: 20, baseValue: 25000, unknown: 650 },
-  { name: "Venus Fly Trap", weightDivisor: 10, baseValue: 45000, unknown: 650 },
-  { name: "Nightshade", weightDivisor: 0.5, baseValue: 3500, unknown: 100 },
-  { name: "Glowshroom", weightDivisor: 0.75, baseValue: 300, unknown: 100 },
-  { name: "Mint", weightDivisor: 1, baseValue: 5250, unknown: 150 },
-  { name: "Moonflower", weightDivisor: 2, baseValue: 9500, unknown: 200 },
-  { name: "Starfruit", weightDivisor: 3, baseValue: 15000, unknown: 250 },
-  { name: "Moonglow", weightDivisor: 7, baseValue: 20000, unknown: 400 },
-  { name: "Moon Blossom", weightDivisor: 3, baseValue: 60000, unknown: 400 },
-  { name: "Crimson Vine", weightDivisor: 1, baseValue: 1250, unknown: 100 },
-  { name: "Moon Melon", weightDivisor: 8, baseValue: 18000, unknown: 300 },
-  { name: "Blood Banana", weightDivisor: 1.5, baseValue: 6000, unknown: 200 },
-  { name: "Celestiberry", weightDivisor: 2, baseValue: 10000, unknown: 200 },
-  { name: "Moon Mango", weightDivisor: 15, baseValue: 50000, unknown: 300 },
-  { name: "Rose", weightDivisor: 1, baseValue: 5000, unknown: 100 },
-  { name: "Foxglove", weightDivisor: 2, baseValue: 20000, unknown: 250 },
-  { name: "Lilac", weightDivisor: 3, baseValue: 35000, unknown: 250 },
-  { name: "Pink Lily", weightDivisor: 6, baseValue: 65000, unknown: 400 },
-  { name: "Purple Dahlia", weightDivisor: 12, baseValue: 75000, unknown: 400 },
-  { name: "Sunflower", weightDivisor: 15, baseValue: 150000, unknown: 600 },
-  { name: "Nectarine", weightDivisor: 3, baseValue: 35000, unknown: 200 },
-  { name: "Hive Fruit", weightDivisor: 8, baseValue: 50000, unknown: 300 },
-  { name: "Ember Lily", weightDivisor: 15, baseValue: 90000, unknown: 450 },
-  { name: "Dandelion", weightDivisor: 0.5, baseValue: 2000, unknown: 250 }
-];
+// Item data: [weightDivisor, baseValue]
+const itemData = {
+  "Carrot": [0.275, 20],
+  "Strawberry": [0.3, 15],
+  "Blueberry": [0.2, 20],
+  "Orange Tulip": [0.05, 850],
+  "Tomato": [0.5, 30],
+  "Corn": [2, 40],
+  "Daffodil": [0.2, 1000],
+  "Watermelon": [7, 3000],
+  "Pumpkin": [8, 3400],
+  "Apple": [3, 275],
+  "Bamboo": [4, 4000],
+  "Coconut": [14, 400],
+  "Cactus": [7, 3400],
+  "Dragon Fruit": [12, 4750],
+  "Mango": [15, 6500],
+  "Grape": [3, 7850],
+  "Mushroom": [25, 151000],
+  "Pepper": [5, 8000],
+  "Cacao": [8, 12000],
+  "Beanstalk": [10, 28000],
+  "Chocolate Carrot": [0.275, 11000],
+  "Red Lollipop": [4, 50000],
+  "Blue Lollipop": [1, 50000],
+  "Candy Sunflower": [1.5, 80000],
+  "Easter Egg": [3, 2500],
+  "Candy Blossom": [3, 100000],
+  "Peach": [2, 300],
+  "Raspberry": [0.75, 100],
+  "Pineapple": [3, 2000],
+  "Papaya": [3, 1000],
+  "Banana": [1.5, 1750],
+  "Passionfruit": [3, 3550],
+  "Soul Fruit": [25, 7750],
+  "Cursed Fruit": [30, 25750],
+  "Mega Mushroom": [70, 500],
+  "Cherry Blossom": [3, 500],
+  "Purple Cabbage": [5, 500],
+  "Lemon": [1, 350],
+  "Pear": [3, 500],
+  "Crocus": [0.05, 850],
+  "Pink Tulip": [0.05, 850],
+  "Succulent": [3, 500],
+  "Avocado": [2, 500],
+  "Cranberry": [1, 3000],
+  "Durian": [8, 7000],
+  "Eggplant": [5, 9500],
+  "Lotus": [20, 25000],
+  "Venus Fly Trap": [10, 45000],
+  "Nightshade": [0.5, 3500],
+  "Glowshroom": [0.75, 300],
+  "Mint": [1, 5250],
+  "Moonflower": [2, 9500],
+  "Starfruit": [3, 15000],
+  "Moonglow": [7, 20000],
+  "Moon Blossom": [3, 60000],
+  "Crimson Vine": [1, 1250],
+  "Moon Melon": [8, 18000],
+  "Blood Banana": [1.5, 6000],
+  "Celestiberry": [2, 10000],
+  "Moon Mango": [15, 50000],
+  "Rose": [1, 5000],
+  "Foxglove": [2, 20000],
+  "Lilac": [3, 35000],
+  "Pink Lily": [6, 65000],
+  "Purple Dahlia": [12, 75000],
+  "Sunflower": [15, 150000],
+  "Nectarine": [3, 35000],
+  "Hive Fruit": [8, 50000],
+  "Ember Lily": [15, 90000],
+  "Dandelion": [0.5, 2000]
+};
 
 const variantMultipliers = {
   "Normal": 1,
@@ -106,18 +107,24 @@ function populateDropdowns() {
   const itemSelect = document.getElementById("item");
   const mutationSelect = document.getElementById("mutations");
 
-  for (const item in itemData) {
-    const opt = document.createElement("option");
-    opt.value = item;
-    opt.textContent = item;
-    itemSelect.appendChild(opt);
+  // Clear any existing options (optional)
+  itemSelect.innerHTML = '<option value="">-- Select Item --</option>';
+  mutationSelect.innerHTML = '';
+
+  // Populate items dropdown
+  for (const itemName in itemData) {
+    const option = document.createElement("option");
+    option.value = itemName;
+    option.textContent = itemName;
+    itemSelect.appendChild(option);
   }
 
+  // Populate mutations multi-select
   for (const mutation of mutationList) {
-    const opt = document.createElement("option");
-    opt.value = mutation;
-    opt.textContent = mutation;
-    mutationSelect.appendChild(opt);
+    const option = document.createElement("option");
+    option.value = mutation;
+    option.textContent = mutation;
+    mutationSelect.appendChild(option);
   }
 }
 
@@ -133,20 +140,42 @@ function calculateValue() {
   const weight = parseFloat(document.getElementById("weight").value);
   const selectedMutations = Array.from(document.getElementById("mutations").selectedOptions).map(o => o.value);
 
-  if (!item || !variant || isNaN(weight)) {
-    document.getElementById("result").textContent = "Please fill in all fields.";
+  if (!item) {
+    alert("Please select an item.");
+    return;
+  }
+  if (!variant) {
+    alert("Please select a variant.");
+    return;
+  }
+  if (isNaN(weight) || weight <= 0) {
+    alert("Please enter a valid weight greater than 0.");
     return;
   }
 
-  const [baseWeight, baseValue] = itemData[item];
+  const [baseWeightDivisor, baseValue] = itemData[item];
   const variantMult = variantMultipliers[variant] || 1;
   const mutationMult = getMutationMultiplier(selectedMutations);
-  const clamped = Math.max(0.95, weight / baseWeight);
+
+  const clamped = Math.max(0.95, weight / baseWeightDivisor);
+
   const finalValue = Math.round(baseValue * mutationMult * variantMult * (clamped ** 2));
 
-  document.getElementById("result").textContent = `Value: ${finalValue.toLocaleString()}`;
+  // Display the result
+  const resultEl = document.getElementById("result");
+  if (resultEl) {
+    resultEl.textContent = `Value: ${finalValue.toLocaleString()}`;
+  } else {
+    alert(`Value: ${finalValue}`);
+  }
 }
 
-document.getElementById("calculate").addEventListener("click", calculateValue);
+// Run once page is ready
+document.addEventListener("DOMContentLoaded", () => {
+  populateDropdowns();
 
-window.onload = populateDropdowns;
+  const calcBtn = document.getElementById("calculate");
+  if (calcBtn) {
+    calcBtn.addEventListener("click", calculateValue);
+  }
+});
