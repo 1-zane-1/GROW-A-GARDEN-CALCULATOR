@@ -117,7 +117,9 @@ function calculatePlantValue(plant, mutations, variant, weight) {
     .map(m => m.trim())
     .filter(m => mutationMultipliers[m]);
 
-  const mutationMult = selectedMutations.reduce((acc, m) => acc * mutationMultipliers[m], 1);
+  // ADDITIVE stacking: sum all mutation multipliers, then apply as (1 + total)
+  const mutationSum = selectedMutations.reduce((acc, m) => acc + mutationMultipliers[m], 0);
+  const mutationMult = 1 + mutationSum;
 
   const clamped = Math.max(0.95, weight / weightDivisor);
   const value = Math.round(baseValue * mutationMult * variantMult * (clamped ** 2));
