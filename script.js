@@ -1,4 +1,3 @@
-// Item data: [weightDivisor, baseValue]
 const itemData = {
   "Carrot": [0.275, 20],
   "Strawberry": [0.3, 15],
@@ -78,12 +77,6 @@ const variantMultipliers = {
   "Rainbow": 50,
 };
 
-const mutationList = [
-  "Zombified", "Wet", "Voidtouched", "Twisted", "Shocked",
-  "Celestial", "Disco", "Frozen", "Burnt", "HoneyGlazed",
-  "Plasma", "Bloodlit", "Pollinated", "Moonlit", "Choc", "Chilled"
-];
-
 const mutationMultipliers = {
   "Zombified": 25,
   "Wet": 2,
@@ -103,79 +96,41 @@ const mutationMultipliers = {
   "Chilled": 2
 };
 
-function populateDropdowns() {
-  const itemSelect = document.getElementById("item");
-  const mutationSelect = document.getElementById("mutations");
-
-  // Clear any existing options (optional)
-  itemSelect.innerHTML = '<option value="">-- Select Item --</option>';
-  mutationSelect.innerHTML = '';
-
-  // Populate items dropdown
-  for (const itemName in itemData) {
-    const option = document.createElement("option");
-    option.value = itemName;
-    option.textContent = itemName;
-    itemSelect.appendChild(option);
+function calculatePlantValue(plant, mutations, variant, weight) {
+  plant = plant.trim();
+  if (!itemData[plant]) {
+    return `Error: Plant "${plant}" not found.`;
+  }
+  if (!variantMultipliers[variant]) {
+    return `Error: Variant "${variant}" is invalid.`;
+  }
+  if (weight <= 0 || isNaN(weight)) {
+    return `Error: Weight must be a positive number.`;
   }
 
-  // Populate mutations multi-select
-  for (const mutation of mutationList) {
-    const option = document.createElement("option");
-    option.value = mutation;
-    option.textContent = mutation;
-    mutationSelect.appendChild(option);
-  }
+  const [weightDivisor, baseValue] = itemData[plant];
+  const variantMult = variantMultipliers[variant];
+
+  // Parse mutation list, clean spaces, ignore unknown mutations
+  const selectedMutations = mutations
+    .split(",")
+    .map(m => m.trim())
+    .filter(m => mutationMultipliers[m]);
+
+  const mutationMult = selectedMutations.reduce((acc, m) => acc * mutationMultipliers[m], 1);
+
+  const clamped = Math.max(0.95, weight / weightDivisor);
+  const value = Math.round(baseValue * mutationMult * variantMult * (clamped ** 2));
+
+  return `Value: ${value.toLocaleString()}`;
 }
 
-function getMutationMultiplier(selectedMutations) {
-  return selectedMutations.reduce((mult, mut) => {
-    return mult * (mutationMultipliers[mut] || 1);
-  }, 1);
-}
-
-function calculateValue() {
-  const item = document.getElementById("item").value;
+document.getElementById("calculate").addEventListener("click", () => {
+  const plant = document.getElementById("plantName").value;
+  const mutations = document.getElementById("mutationsInput").value;
   const variant = document.getElementById("variant").value;
   const weight = parseFloat(document.getElementById("weight").value);
-  const selectedMutations = Array.from(document.getElementById("mutations").selectedOptions).map(o => o.value);
 
-  if (!item) {
-    alert("Please select an item.");
-    return;
-  }
-  if (!variant) {
-    alert("Please select a variant.");
-    return;
-  }
-  if (isNaN(weight) || weight <= 0) {
-    alert("Please enter a valid weight greater than 0.");
-    return;
-  }
-
-  const [baseWeightDivisor, baseValue] = itemData[item];
-  const variantMult = variantMultipliers[variant] || 1;
-  const mutationMult = getMutationMultiplier(selectedMutations);
-
-  const clamped = Math.max(0.95, weight / baseWeightDivisor);
-
-  const finalValue = Math.round(baseValue * mutationMult * variantMult * (clamped ** 2));
-
-  // Display the result
-  const resultEl = document.getElementById("result");
-  if (resultEl) {
-    resultEl.textContent = `Value: ${finalValue.toLocaleString()}`;
-  } else {
-    alert(`Value: ${finalValue}`);
-  }
-}
-
-// Run once page is ready
-document.addEventListener("DOMContentLoaded", () => {
-  populateDropdowns();
-
-  const calcBtn = document.getElementById("calculate");
-  if (calcBtn) {
-    calcBtn.addEventListener("click", calculateValue);
-  }
+  const result = calculatePlantValue(plant, mutations, variant, weight);
+  document.getElementById("result").textContent = result;
 });
